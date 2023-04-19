@@ -10,6 +10,14 @@ pages="701203042303120"
 pages="701203042303212017"
 # Implement FIFO algorithm
 def FIFO(frames, pages):
+    ''''
+    This function implements the FIFO page replacement algorithm
+
+    :param frames: the frames used for RAM 
+    :param pages: contains a list or string of entered pages
+    :return: number of faults
+
+    '''
     count = 0
     queue = []
     for page in pages:
@@ -24,6 +32,13 @@ def FIFO(frames, pages):
 
 # Implement LRU algorithm
 def LRU(frames, pages):
+    '''
+    This function implements the LRU page replacement algorithm
+
+    :param frames: the frames used for RAM 
+    :param pages: contains a list or string of entered pages
+    :return: number of faults
+    '''
     count = 0
     stack = []
     for page in pages:
@@ -41,6 +56,13 @@ def LRU(frames, pages):
 
 # Implement OPT algorithm
 def OPT(frames, pages):
+    '''
+    This function implements the Optimal page replacement algorithm
+
+    :param frames: the frames used for RAM 
+    :param pages: contains a list or string of entered pages
+    :return: number of faults
+    '''
     count = 0
     queue = []
     for page in pages:
