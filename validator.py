@@ -6,7 +6,8 @@ import random
 
 # Generate random page-reference string
 pages = [random.randint(0, 9) for i in range(100)]
-#pages="701203042303120"
+pages="701203042303120"
+pages="701203042303212017"
 # Implement FIFO algorithm
 def FIFO(frames, pages):
     count = 0
