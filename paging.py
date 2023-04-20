@@ -1,18 +1,20 @@
 """
 This script creates the application 
-that implements the F IFO, LRU, and optimal page replacement algorithms 
+that implements the FIFO, LRU, and optimal page replacement algorithms 
 
 Author: Sydney Muganda (mgnsyd001@myuct.ac.za)
 Date: 2nd April 2023
 """
 
 import copy 
-
+import sys
+import random
 
 
 pages="701203042303120"
 pages="701203042303212017"
-pages="5760717201710"
+pages="70120304230321201701"
+pages=[random.randint(0, 9) for i in range(random.randint(1, 101))]
 #pages=[4, 8, 8, 6, 8, 9, 2, 5, 9, 6, 6, 0, 7, 0, 0, 8, 4, 7, 0, 9, 5, 5, 1, 7, 2, 8, 8, 7, 5, 4, 7, 1, 8, 6, 0, 3, 9, 1, 2, 3, 5, 1, 0, 4, 7, 1, 4, 5, 9, 5, 5, 8, 1, 8, 8, 3, 0, 2, 0, 6, 7, 9, 4, 9, 1, 7, 7, 7, 4, 7, 7, 5, 9, 4, 2, 4, 5, 1, 5, 9, 7, 5, 2, 2, 8, 3, 5, 1, 3, 9, 5, 0, 4, 5, 5, 3, 9, 5, 2, 5]
 def FIFO(frames,pages):
     ''''
@@ -23,18 +25,18 @@ def FIFO(frames,pages):
     :return: number of faults
 
     '''
-    stack=[]
-    fault=0
-    page_list=[]
+    stack=[] #holds the memory
+    fault=0 #number of faults
+    page_list=[] #converts string input of pages to a list for testing
 
-    if not (type(pages) is list):
+    if not (type(pages) is list):#converts string input of pages to a list for testing
         for char in pages:
             page_list.append(char)
         pages=page_list
        
 
 
-    for entry in pages:
+    for entry in pages:#FIFO IMPLEMENTATION
         if entry in stack:
             continue
 
@@ -59,13 +61,13 @@ def LRU(frames,pages):
     :param pages: contains a list or string of entered pages
     :return: number of faults
     '''
-    stack=[]
-    fault=0
-    page_list=[]
+    stack=[]#holds the memory
+    fault=0#number of faults
+    page_list=[]#converts string input of pages to a list for testing
 
     
 
-    if not (type(pages) is list):
+    if not (type(pages) is list):#converts string input of pages to a list for testing
         for char in pages:
             page_list.append(char)
         pages=page_list
@@ -91,7 +93,14 @@ def LRU(frames,pages):
     return fault    
 
 def leat_used(stack:list,subpage:list):
-    least_used_value=len(subpage)
+    ''''
+    This function finds the least used paage entry in stack to treplace
+
+    :param stack: the frames used for RAM 
+    :param subpage: contains a list or string of entered pages
+    :return: index of least used pagwe entry
+
+    '''
     r_subpage=list(reversed(subpage))
     stack_copy=copy.copy(stack)
     for p in r_subpage:
@@ -115,11 +124,11 @@ def OPT(frames,pages):
     '''
     stack=[]
     fault=0
-    page_list=[]
+    page_list=[]#converts string input of pages to a list for testing
 
     
 
-    if not (type(pages) is list):
+    if not (type(pages) is list):#converts string input of pages to a list for testing
         for char in pages:
             page_list.append(char)
         pages=page_list
@@ -148,7 +157,14 @@ def OPT(frames,pages):
 
     return fault    
 def last_used(stack:list,subpage:list):
-    
+    ''''
+    This function finds the most used paage entry in stack to treplace
+
+    :param stack: the frames used for RAM 
+    :param subpage: contains a list or string of entered pages
+    :return: index of most used pagwe entry
+
+    '''
     stack_copy=copy.copy(stack)
 
     for value in stack:
@@ -169,27 +185,31 @@ def last_used(stack:list,subpage:list):
 
 
 def main():
-    #print(pages.split())
-    print(FIFO(3,pages))
-    print(LRU(3,pages))
-    print(OPT(3,pages))
+    size = int(sys.argv[1])
+    print('FIFO', FIFO(size, pages), 'page faults.')
+    print('LRU', LRU(size, pages), 'page faults.')
+    print('OPT', OPT(size, pages), 'page faults.')
+    print(pages)
+    # print(FIFO(4,pages))
+    # print(LRU(4,pages))
+    # print(OPT(4,pages))
 
-    print("FIFO:")
+    # print("FIFO:")
 
-    print("Test with FIFO(3,321321). Expected output: 3 actual output:",FIFO(3,"321321"))
-    print("Test with FIFO(3,123123). Expected output: 3 actual output:",FIFO(3,"123123"))
-    print("Test with FIFO(1,111111). Expected output: 1 actual output:",FIFO(1,"111111"))
-    print()
-    print("LRU:")
-    print()
-    print("Test with LRU(3,321321). Expected output: 3 actual output:",LRU(3,"321321"))
-    print("Test with LRU(3,123123). Expected output: 3 actual output:",LRU(3,"123123"))
-    print("Test with LRU(1,111111). Expected output: 1 actual output:",LRU(1,"111111"))
-    print("OPT:")
-    print()
-    print("Test with OPT(3,321321). Expected output: 2 actual output:",OPT(3,"321321"))
-    print("Test with OPT(3,123123). Expected output: 2 actual output:",OPT(3,"123123"))
-    print("Test with OPT(1,111111). Expected output: 1 actual output:",OPT(1,"111111"))
+    # print("Test with FIFO(3,321321). Expected output: 3 actual output:",FIFO(3,"321321"))
+    # print("Test with FIFO(3,123123). Expected output: 3 actual output:",FIFO(3,"123123"))
+    # print("Test with FIFO(1,111111). Expected output: 1 actual output:",FIFO(1,"111111"))
+    # print()
+    # print("LRU:")
+    # print()
+    # print("Test with LRU(3,321321). Expected output: 3 actual output:",LRU(3,"321321"))
+    # print("Test with LRU(3,123123). Expected output: 3 actual output:",LRU(3,"123123"))
+    # print("Test with LRU(1,111111). Expected output: 1 actual output:",LRU(1,"111111"))
+    # print("OPT:")
+    # print()
+    # print("Test with OPT(3,321321). Expected output: 2 actual output:",OPT(3,"321321"))
+    # print("Test with OPT(3,123123). Expected output: 2 actual output:",OPT(3,"123123"))
+    # print("Test with OPT(1,111111). Expected output: 1 actual output:",OPT(1,"111111"))
 
  
 
