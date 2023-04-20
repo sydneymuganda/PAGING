@@ -101,17 +101,17 @@ def leat_used(stack:list,subpage:list):
     :return: index of least used pagwe entry
 
     '''
-    r_subpage=list(reversed(subpage))
-    stack_copy=copy.copy(stack)
+    r_subpage=list(reversed(subpage)) #reverses subpage to find least used
+    stack_copy=copy.copy(stack)#makes copy of stack
     for p in r_subpage:
         if len(stack)==1:break
 
-        if p in stack:
+        if p in stack: #remove most reently used page entry in stack till only the least recently used is left
            stack.remove(p)
 
         
 
-    return stack_copy.index(stack[0])        
+    return stack_copy.index(stack[0])    #return index of least recently used in stack    
 
 
 def OPT(frames,pages):  
@@ -167,13 +167,13 @@ def last_used(stack:list,subpage:list):
     '''
     stack_copy=copy.copy(stack)
 
-    for value in stack:
+    for value in stack:#if value in stack not in pages then it is never used thus returned
         if value in subpage:
             pass
         else:
             return stack.index(value)
 
-    for p in subpage:
+    for p in subpage:#remove most likely to be used page entry in stack till only the last  used is left
         if len(stack)==1:break
 
         if p in stack:
@@ -181,7 +181,7 @@ def last_used(stack:list,subpage:list):
 
         
 
-    return stack_copy.index(stack[0])  
+    return stack_copy.index(stack[0])   #return index of last likely  used in stack
 
 
 def main():
