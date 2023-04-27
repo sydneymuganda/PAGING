@@ -12,10 +12,9 @@ import random
 
 
 pages="701203042303120"
-pages="701203042303212017"
-#pages="23456712340987"
 
-#pages=[4, 8, 8, 6, 8, 9, 2, 5, 9, 6, 6, 0, 7, 0, 0, 8, 4, 7, 0, 9, 5, 5, 1, 7, 2, 8, 8, 7, 5, 4, 7, 1, 8, 6, 0, 3, 9, 1, 2, 3, 5, 1, 0, 4, 7, 1, 4, 5, 9, 5, 5, 8, 1, 8, 8, 3, 0, 2, 0, 6, 7, 9, 4, 9, 1, 7, 7, 7, 4, 7, 7, 5, 9, 4, 2, 4, 5, 1, 5, 9, 7, 5, 2, 2, 8, 3, 5, 1, 3, 9, 5, 0, 4, 5, 5, 3, 9, 5, 2, 5]
+
+
 def FIFO(frames,pages):
     ''''
     This function implements the FIFO page replacement algorithm
@@ -133,7 +132,7 @@ def OPT(frames,pages):
         pages=page_list
 
     pointer=0
-    for entry in pages:
+    for entry in pages:#OPT IMPLEMENTATION
         
         if entry in stack:
             pointer=pointer+1
@@ -183,6 +182,7 @@ def last_used(stack:list,subpage:list):
 
 
 def main():
+    
     size = int(sys.argv[1])
     reference_size=int(input("enter size of reference string:\n"))
     pages=[random.randint(0, 9) for i in range(reference_size)]
@@ -191,7 +191,7 @@ def main():
     print('LRU', LRU(size, pages), 'page faults.')
     print('OPT', OPT(size, pages), 'page faults.')
     print()
-    print("The entered string:")
+    print("The page reference string generated:")
     print(pages)
     
 
@@ -201,4 +201,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv)!=2: 
+        print("Usage: python paging.py [number of page frames]")
+    else:
+        main()
+    
